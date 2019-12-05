@@ -30,6 +30,7 @@ function getSatMsg() {
     //if sucessful, send email and remove the label from the email so that it doesn't run again on this message
     if(data.getResponseCode()==200){
       var label = GmailApp.getUserLabelByName("SAT File");
+      //email notification of success or failure will go to this address
       var email = 'user@domain.com';
       var sub = "SAT CSV File Import Success";
       var msg = "Output from the CSV Import is:<br>" + data.getContentText();
@@ -37,6 +38,7 @@ function getSatMsg() {
         htmlBody: msg
       });
       for (var i=0; i< threads.length; i++) {
+          //remove the labe from the email if successful
         threads[i].removeLabel(label);
       }
     }
